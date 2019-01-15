@@ -43,9 +43,21 @@ export function dateTimeFormatter (date ,format) {
 
   return format
 }
+function checkDateFormat (date) {
+  return /^\d{4}\/\d{1,2}\/\d{1,2}$/.test(date)
+}
 export function isEqualDateStr (dateStr1, dateStr2) {
-  let dateArr1 = dateStr1.split('/')
-  let dateArr2 = dateStr2.split('/')
+  let dateArr1, dateArr2 = dateStr2.split('/')
+
+  if (checkDateFormat(dateStr1)) {
+    dateArr1 = dateStr1.includes('/') ? dateStr1.split('/') : dateStr1.split('-')
+  } else if (checkDateFormat(dateStr1.date)) {
+    dateArr1 = dateStr1.date.includes('/') ? dateStr1.date.split('/') : dateStr1.date.split('-')
+  } else {
+    console.error(dateStr1)
+    throw new Error('你填充入日历的数据格式不规范,数据格式必须为 [日期字符串] 或者是 [带有date属性的对象且date属性的值为一个正确的日期格式,月和日不强制要求补0传入],')
+  }
+
   if (parseInt(dateArr1[0], 10) !== parseInt(dateArr2[0], 10)) {
     return false
   }

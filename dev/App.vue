@@ -26,7 +26,8 @@ export default {
   data () {
     return {
       demoEvents: [{
-        date: `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`,
+        // date: `${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`,
+        date: {date: `${today.getFullYear()}/${today.getMonth() + 1}/15`, status: 1},
         title: 'Title-1',
         desc: 'longlonglong description'
       },{
